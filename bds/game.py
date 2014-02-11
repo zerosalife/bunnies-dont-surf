@@ -30,9 +30,9 @@ class Game(object):
         while self.running:
             self.clock.tick()
             self.new_time = self.clock.get_rawtime()
+
             self.frame_time = self.new_time - self.current_time
             self.current_time = self.new_time
-
 
             pygame.time.wait(1 / c.TARGET_FPS)
             time_elapsed = 1 / c.TARGET_FPS   # Duration per frame in ms

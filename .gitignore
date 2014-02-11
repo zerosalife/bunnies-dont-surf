@@ -1,0 +1,24 @@
+*~*
+*#*
+
+## Ignore ropeproject
+.ropeproject/*
+
+## Ignore compiled python files
+*.pyc
+
+## Ignore virtualenv
+bin/activate
+bin/activate.csh
+bin/activate.fish
+bin/activate_this.py
+bin/easy_install
+bin/easy_install-2.7
+bin/pip
+bin/pip-2.7
+bin/python
+bin/python2
+bin/python2.7
+include
+lib
+.Python

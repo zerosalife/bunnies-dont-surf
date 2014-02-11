@@ -1,6 +1,6 @@
 import pygame
 
-import gameskeleton.constants as c
+import bds.constants as c
 
 
 class ResourceManager(object):

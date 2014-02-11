@@ -1,7 +1,7 @@
 import pygame
 import pygame.locals as pgl
 
-import gameskeleton.constants as c
+import bds.constants as c
 
 import collections
 

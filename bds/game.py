@@ -17,19 +17,30 @@ class Game(object):
         self.input = bds.input.Input(self)
 
         self.tick = 0
-        self.total_time = 0
+        self.total_time = 0.0
+        self.dt = 1/c.PHYSICS_FPS
+        self.accumulator = 0.0
 
         pygame.display.set_caption(c.GAME_NAME)
+        self.clock = pygame.time.Clock()
+        self.current_time = self.clock.get_rawtime()
 
     def loop(self):
         self.running = True
         while self.running:
-            pygame.time.wait(1000 / c.TARGET_FPS)
-            time_elapsed = 1000 / c.TARGET_FPS   # Duration per frame in ms
+            self.clock.tick()
+            self.new_time = self.clock.get_rawtime()
+            self.frame_time = self.new_time - self.current_time
+            self.current_time = self.new_time
+
+
+            pygame.time.wait(1 / c.TARGET_FPS)
+            time_elapsed = 1 / c.TARGET_FPS   # Duration per frame in ms
 
             self.input.handle_events()
             self.update(time_elapsed)
             self.render()
+            print self.clock.get_fps()
         self.exit()
 
     def exit(self):

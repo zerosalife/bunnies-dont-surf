@@ -13,3 +13,13 @@ VALID_ACTIONS = ["space"]
 KEY_MAPPING = {
     pgl.K_SPACE: "space",
 }
+
+SCORE_POS = vector.Vec2(SCREEN_DIMENSIONS.x / 2, 20)
+
+RES_IMAGES = {
+
+}
+
+RES_FONTS = {
+
+}

@@ -12,6 +12,7 @@ class Input(object):
         self.keymap = keymap
 
         self.keys = {k: False for k in c.VALID_ACTIONS}
+        self.pressed_keys = collections.defaultdict(bool)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -20,9 +21,11 @@ class Input(object):
                 self.game.running = False
 
             elif event.type == pgl.KEYDOWN and event.key in self.keymap:
+                self.pressed_keys[event.key] = True
                 self.keys[self.keymap[event.key]] = True
 
             elif event.type == pgl.KEYUP and event.key in self.keymap:
+                self.pressed_keys[event.key] = False
                 self.keys[self.keymap[event.key]] = False
 
     def next_frame(self):

@@ -39,6 +39,6 @@ class MenuMode(gameskeleton.modes.GameMode):
     def render(self):
         scr = self.game.screen
 
-        self.scr.fill(c.BACKGROUND_COLOR)
+        scr.fill(c.BACKGROUND_COLOR)
 
         self.logo.render()

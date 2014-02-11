@@ -1,9 +1,9 @@
 if __name__ == '__main__':
-    import gameskeleton.game
+    import bds.game
 
-    game = gameskeleton.game.Game()
+    game = bds.game.Game()
 
-    import gameskeleton.modes.debug.mode
-    game.mode = gameskeleton.modes.debug.mode.DebugMode(game)
+    import bds.modes.debug.mode
+    game.mode = bds.modes.debug.mode.DebugMode(game)
 
     game.loop()

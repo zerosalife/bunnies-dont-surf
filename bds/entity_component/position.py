@@ -1,4 +1,4 @@
-from gameskeleton.entity_component.base import Component
+from bds.entity_component.base import Component
 
 
 class Position(Component):

@@ -1,21 +1,21 @@
 import pygame
 
-import gameskeleton
+import bds
 
-import gameskeleton.modes.debug.mode
-from gameskeleton.vector import Vec2
-import gameskeleton.constants as c
-import gameskeleton.entity_component as ec
+import bds.modes.debug.mode
+from bds.vector import Vec2
+import bds.constants as c
+import bds.entity_component as ec
 
 
-class MenuMode(gameskeleton.modes.GameMode):
+class MenuMode(bds.modes.GameMode):
     def __init__(self, game):
-        gameskeleton.modes.GameMode.__init__(self, game)
+        bds.modes.GameMode.__init__(self, game)
 
-        self.main_font = gameskeleton.resource.font.med_gui
+        self.main_font = bds.resource.font.med_gui
 
         def play():
-            self.game.mode = gameskeleton.modes.debug.mode.DebugMode(self.game)
+            self.game.mode = bds.modes.debug.mode.DebugMode(self.game)
 
 
         self.logo = ec.base.Entity(self, components=[

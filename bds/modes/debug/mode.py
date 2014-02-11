@@ -4,17 +4,17 @@ import random
 
 import collections
 
-from gameskeleton.vector import Vec2
-import gameskeleton.constants as c
-import gameskeleton.modes
-import gameskeleton.entity_component as ec
-import gameskeleton.resource
+from bds.vector import Vec2
+import bds.constants as c
+import bds.modes
+import bds.entity_component as ec
+import bds.resource
 
 
-class DebugMode(gameskeleton.modes.GameMode):
+class DebugMode(bds.modes.GameMode):
 
     def __init__(self, game):
-        gameskeleton.modes.GameMode.__init__(self, game)
+        bds.modes.GameMode.__init__(self, game)
 
         self.last_keys = collections.defaultdict(bool)
         self.valid_keys = [k for k, v in c.KEY_MAPPING.items()]

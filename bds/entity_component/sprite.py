@@ -1,11 +1,11 @@
-from gameskeleton.entity_component.base import Component
+from bds.entity_component.base import Component
 
 import math
 
 import pygame
 import pygame.locals as pgl
 
-from gameskeleton.vector import Vec2
+from bds.vector import Vec2
 
 
 class Sprite(Component):

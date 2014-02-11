@@ -3,8 +3,8 @@ import sys
 import pygame
 import pygame.locals as pgl
 
-import gameskeleton.constants as c
-import gameskeleton.input
+import bds.constants as c
+import bds.input
 
 class Game(object):
     def __init__(self):
@@ -14,7 +14,7 @@ class Game(object):
         self.running = False
         self.mode = None
 
-        self.input = gameskeleton.input.Input(self)
+        self.input = bds.input.Input(self)
 
         self.tick = 0
         self.total_time = 0

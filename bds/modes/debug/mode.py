@@ -19,10 +19,17 @@ class DebugMode(bds.modes.GameMode):
         self.last_keys = collections.defaultdict(bool)
         self.valid_keys = [k for k, v in c.KEY_MAPPING.items()]
         self.new_presses = set()
+
         self.score = 0
         self.score_pos_init = Vec2(c.SCORE_POS)
 
-        base_pos = Vec2(0, 0)
+        self.collisionp = False
+
+        self.player = ec.base.Entity(self, components=[
+            ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), c.BUNNY_COLOR),
+            ec.Position(Vec2(80, 100)),
+            ec.PlayerMovement()])
+
 
         self.e_list = [
         # Water
@@ -32,13 +39,12 @@ class DebugMode(bds.modes.GameMode):
         # Floor
             ec.base.Entity(self, components=[
                 ec.Rect(pygame.Rect(Vec2(0, 0), c.FLOOR_DIMS), c.FLOOR_COLOR),
-                ec.Position(Vec2(160, 440))
+                ec.Position(Vec2(160, 440)),
+                ec.Collider(),
             ]),
+
         # Bunny
-            ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), c.BUNNY_COLOR),
-                ec.Position(Vec2(80, 100)),
-                ec.PlayerMovement()]),
+            self.player,
             ]
 
         self.fps_font = bds.resource.font.med_gui
@@ -54,6 +60,11 @@ class DebugMode(bds.modes.GameMode):
 
         for e in self.e_list:
             e.update(time_elapsed)
+
+        if self.collisionp:
+            print "Collided"
+            self.collisionp = False
+
 
         self.last_keys = pressed_keys
 

@@ -22,8 +22,9 @@ class Rect(Component):
         self.rect = rect
 
     def render(self, component, entity, event):
+        rect = self.rect
         position = entity.handle("get_position")
-        self.rect.center = position
+        rect.center = position
 
         surf = entity.mode.game.screen
         draw.rect(surf, self.color, self.rect)

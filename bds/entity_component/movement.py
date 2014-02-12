@@ -4,6 +4,7 @@ from bds.vector import Vec2
 
 import bds.constants as c
 
+
 class Movement(Component):
     def __init__(self, velocity=Vec2(0, 0), acceleration=Vec2(0, 0)):
         Component.__init__(self)

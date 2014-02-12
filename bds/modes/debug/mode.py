@@ -29,6 +29,11 @@ class DebugMode(bds.modes.GameMode):
             ec.base.Entity(self, components=[
                 ec.Rect(pygame.Rect(Vec2(0, 0), c.WATER_DIMS), c.WATER_COLOR),
                 ec.Position(Vec2(40, 240)),]),
+        # Floor
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(0, 0), c.FLOOR_DIMS), c.FLOOR_COLOR),
+                ec.Position(Vec2(160, 440))
+            ]),
         # Bunny
             ec.base.Entity(self, components=[
                 ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), c.BUNNY_COLOR),

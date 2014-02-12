@@ -34,7 +34,6 @@ class PlayerMovement(Movement):
         for k in valid_keys:
             if k in new_presses:
                 if input.state.space:
-                    print "space"
                     self.acceleration = Vec2(0, 0)
                     self.velocity = c.BUNNY_JUMP * time_elapsed
 

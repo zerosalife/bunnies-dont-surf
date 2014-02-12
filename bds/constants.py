@@ -16,6 +16,9 @@ UI_TEXT_COLOR = pygame.Color("0xFFFFFF")
 BUNNY_COLOR = pygame.Color(215, 215, 215)
 WATER_COLOR = pygame.Color(91, 168, 255)
 
+BUNNY_DIMS = vector.Vec2(18, 12)
+WATER_DIMS = vector.Vec2(98, 480)
+
 VALID_ACTIONS = ["space"]
 
 KEY_MAPPING = {
@@ -32,5 +35,3 @@ RES_IMAGES = {
 RES_FONTS = {
     "med_gui": ("data/fonts/PressStart2P-Regular.ttf", 16),
 }
-
-BUNNY_DIMS = vector.Vec2(36, 24)

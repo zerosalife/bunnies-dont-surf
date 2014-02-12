@@ -24,10 +24,17 @@ class DebugMode(bds.modes.GameMode):
 
         base_pos = Vec2(0, 0)
 
-        self.e_list = [ec.base.Entity(self, components=[
-            ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), ),
-            ec.Position(Vec2(100, 300)),
-            ec.PlayerMovement()]),]
+        self.e_list = [
+        # Water
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(0, 0), c.WATER_DIMS), c.WATER_COLOR),
+                ec.Position(Vec2(40, 240)),]),
+        # Bunny
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), c.BUNNY_COLOR),
+                ec.Position(Vec2(80, 100)),
+                ec.PlayerMovement()]),
+            ]
 
         self.fps_font = bds.resource.font.med_gui
 

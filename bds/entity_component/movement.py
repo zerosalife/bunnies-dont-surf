@@ -54,5 +54,15 @@ class WallMovement(Movement):
     def __init__(self, velocity=Vec2(0, 0), acceleration=Vec2(0, 0)):
         Movement.__init__(self)
 
+        self.velocity = c.WALL_VELOCITY
+
+
     def update(self, component, entity, event, time_elapsed):
-        pass
+        position = entity.handle("get_position")
+
+        position += self.velocity * time_elapsed
+
+        # if position.x < BOUNDARY:
+        #     REMOVE IT
+
+        entity.handle("set_position", position)

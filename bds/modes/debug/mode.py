@@ -4,6 +4,8 @@ import random
 
 import collections
 
+from itertools import chain
+
 from bds.vector import Vec2
 import bds.constants as c
 import bds.modes
@@ -30,19 +32,47 @@ class DebugMode(bds.modes.GameMode):
             ec.Position(Vec2(80, 100)),
             ec.PlayerMovement()])
 
+        self.floor = ec.base.Entity(self, components=[
+            ec.Rect(pygame.Rect(Vec2(160, 440), c.FLOOR_DIMS), c.FLOOR_COLOR),
+            ec.Position(Vec2(160, 440)),
+            ec.Collider(),])
+
+        self.wall_list = [
+        # Wall bottom
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
+                                         370),  # WALL_BOT_HEIGHT
+        # Wall Dims
+                                    Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
+                                    c.WALL_COLOR),
+                ec.Position(Vec2(400, 370)),
+                ec.WallMovement(),
+                ec.Collider(),
+            ]),
+        ]
+
 
         self.e_list = [
         # Water
             ec.base.Entity(self, components=[
                 ec.Rect(pygame.Rect(Vec2(40, 240), c.WATER_DIMS), c.WATER_COLOR),
                 ec.Position(Vec2(40, 240)),]),
-        # Floor
+        # # Walls
+        #     self.wall_list[:],
+        # Wall bottom
             ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(160, 440), c.FLOOR_DIMS), c.FLOOR_COLOR),
-                ec.Position(Vec2(160, 440)),
+                ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
+                                         370),  # WALL_BOT_HEIGHT
+        # Wall Dims
+                                    Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
+                                    c.WALL_COLOR),
+                ec.Position(Vec2(400, 370)),
+                ec.WallMovement(),
                 ec.Collider(),
             ]),
 
+        # Floor
+            self.floor,
         # Bunny
             self.player,
             ]
@@ -54,7 +84,7 @@ class DebugMode(bds.modes.GameMode):
         # Consider putting the movement of the player to the floor in
         # the GameOverMode, so we can animate the player falling.
         p_pos = self.player.handle("get_position")
-        floor_rect = self.e_list[1].handle("get_rect")
+        floor_rect = self.floor.handle("get_rect")
         if p_pos.y > floor_rect.top:
             self.player.handle("set_position",
                                Vec2(p_pos.x,

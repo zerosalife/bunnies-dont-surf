@@ -53,9 +53,9 @@ class DebugMode(bds.modes.GameMode):
     def update(self, time_elapsed):
         input = self.game.input
         self.valid_keys = [k for k, v in c.KEY_MAPPING.items()]
-        pressed_keys = input.pressed_keys.copy()
+        self.pressed_keys = input.pressed_keys.copy()
 
-        self.new_presses = set(k for k, v in pressed_keys.items() if v !=
+        self.new_presses = set(k for k, v in self.pressed_keys.items() if v !=
                                self.last_keys[k] and v)
 
         for e in self.e_list:
@@ -66,7 +66,7 @@ class DebugMode(bds.modes.GameMode):
             self.collisionp = False
 
 
-        self.last_keys = pressed_keys
+        self.last_keys = self.pressed_keys
 
 
     def render(self):

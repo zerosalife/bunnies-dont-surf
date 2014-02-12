@@ -24,11 +24,10 @@ class PlayerMovement(Movement):
 
     def update(self, component, entity, event, time_elapsed):
         input = entity.mode.game.input
-        valid_keys = [k for k, v in c.KEY_MAPPING.items()]
-        pressed_keys = input.pressed_keys.copy()
 
-        new_presses = set(k for k, v in pressed_keys.items() if v !=
-                          entity.mode.last_keys[k] and v)
+        valid_keys = entity.mode.valid_keys
+        pressed_keys = entity.mode.pressed_keys
+        new_presses = entity.mode.new_presses
 
         position = entity.handle("get_position")
 

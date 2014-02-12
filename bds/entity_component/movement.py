@@ -43,6 +43,9 @@ class PlayerMovement(Movement):
             self.velocity = c.TERMINAL_VELOCITY
         position += self.velocity * time_elapsed
 
+        if position.y < -20:
+            position.y = -20
+
         entity.handle("set_position", position)
 
 

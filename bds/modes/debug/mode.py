@@ -9,7 +9,7 @@ import bds.constants as c
 import bds.modes
 import bds.entity_component as ec
 import bds.resource
-
+import bds.modes.gameover.mode
 
 class DebugMode(bds.modes.GameMode):
 
@@ -26,7 +26,7 @@ class DebugMode(bds.modes.GameMode):
         self.collisionp = False
 
         self.player = ec.base.Entity(self, components=[
-            ec.Rect(pygame.Rect(Vec2(0, 0), c.BUNNY_DIMS), c.BUNNY_COLOR),
+            ec.Rect(pygame.Rect(Vec2(80, 100), c.BUNNY_DIMS), c.BUNNY_COLOR),
             ec.Position(Vec2(80, 100)),
             ec.PlayerMovement()])
 
@@ -34,11 +34,11 @@ class DebugMode(bds.modes.GameMode):
         self.e_list = [
         # Water
             ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(0, 0), c.WATER_DIMS), c.WATER_COLOR),
+                ec.Rect(pygame.Rect(Vec2(40, 240), c.WATER_DIMS), c.WATER_COLOR),
                 ec.Position(Vec2(40, 240)),]),
         # Floor
             ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(0, 0), c.FLOOR_DIMS), c.FLOOR_COLOR),
+                ec.Rect(pygame.Rect(Vec2(160, 440), c.FLOOR_DIMS), c.FLOOR_COLOR),
                 ec.Position(Vec2(160, 440)),
                 ec.Collider(),
             ]),
@@ -49,6 +49,19 @@ class DebugMode(bds.modes.GameMode):
 
         self.fps_font = bds.resource.font.med_gui
 
+
+    def finish(self):
+        # Consider putting the movement of the player to the floor in
+        # the GameOverMode, so we can animate the player falling.
+        p_pos = self.player.handle("get_position")
+        floor_rect = self.e_list[1].handle("get_rect")
+        if p_pos.y > floor_rect.top:
+            self.player.handle("set_position",
+                               Vec2(p_pos.x,
+                                    floor_rect.top - c.BUNNY_DIMS.y / 2))
+        self.game.mode = bds.modes.gameover.mode.GameOverMode(self.game,
+                                                              self.score,
+                                                              self.e_list)
 
     def update(self, time_elapsed):
         input = self.game.input
@@ -63,7 +76,7 @@ class DebugMode(bds.modes.GameMode):
 
         if self.collisionp:
             print "Collided"
-            self.collisionp = False
+            self.finish()
 
 
         self.last_keys = self.pressed_keys

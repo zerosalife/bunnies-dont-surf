@@ -21,14 +21,17 @@ BUNNY_DIMS = vector.Vec2(18, 12)
 WATER_DIMS = vector.Vec2(98, 480)
 FLOOR_DIMS = vector.Vec2(320, 80)
 
+GAME_OVER_POS = vector.Vec2(SCREEN_DIMENSIONS.x / 2, 20)
+SCORE_POS = vector.Vec2(SCREEN_DIMENSIONS.x / 2, 100)
+FPS_POS = vector.Vec2(0, 0)
+
+
 VALID_ACTIONS = ["space"]
 
 KEY_MAPPING = {
     pgl.K_SPACE: "space",
 }
 
-SCORE_POS = vector.Vec2(SCREEN_DIMENSIONS.x / 2, 20)
-FPS_POS = vector.Vec2(0, 0)
 
 RES_IMAGES = {
 

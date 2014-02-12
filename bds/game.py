@@ -18,29 +18,30 @@ class Game(object):
 
         self.tick = 0
         self.total_time = 0.0
-        self.dt = 1/c.PHYSICS_FPS
+        self.dt = c.DT
         self.accumulator = 0.0
 
         pygame.display.set_caption(c.GAME_NAME)
         self.clock = pygame.time.Clock()
-        self.current_time = self.clock.get_rawtime()
+        self.current_time = pygame.time.get_ticks() / 1000.0
 
     def loop(self):
         self.running = True
         while self.running:
             self.clock.tick()
-            self.new_time = self.clock.get_rawtime()
-
+            self.new_time = pygame.time.get_ticks() / 1000.0
             self.frame_time = self.new_time - self.current_time
             self.current_time = self.new_time
 
-            pygame.time.wait(1 / c.TARGET_FPS)
-            time_elapsed = 1 / c.TARGET_FPS   # Duration per frame in ms
+            delta_time = self.dt
 
             self.input.handle_events()
-            self.update(time_elapsed)
+            while self.frame_time > 0:
+                time_elapsed = min(self.frame_time, delta_time)
+                self.update(time_elapsed)
+                self.frame_time -= time_elapsed
+                self.total_time += time_elapsed
             self.render()
-            print self.clock.get_fps()
         self.exit()
 
     def exit(self):

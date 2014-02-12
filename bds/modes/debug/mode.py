@@ -27,6 +27,9 @@ class DebugMode(bds.modes.GameMode):
         self.e_list = [ec.base.Entity(self, components=[
             ec.Position(Vec2(-280, 200)),]),]
 
+        self.fps_font = bds.resource.font.med_gui
+
+
     def update(self, time_elapsed):
         input = self.game.input
         self.valid_keys = [k for k, v in c.KEY_MAPPING.items()]
@@ -49,3 +52,7 @@ class DebugMode(bds.modes.GameMode):
 
         for e in self.e_list:
             e.render()
+
+        fps = self.fps_font.render("{0:.1f}".format(self.game.clock.get_fps()),
+                                   True, c.UI_TEXT_COLOR)
+        scr.blit(fps, c.FPS_POS.as_tuple())

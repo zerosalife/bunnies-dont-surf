@@ -12,6 +12,7 @@ import bds.modes
 import bds.entity_component as ec
 import bds.resource
 import bds.modes.gameover.mode
+from bds import util
 
 class DebugMode(bds.modes.GameMode):
 
@@ -43,7 +44,7 @@ class DebugMode(bds.modes.GameMode):
                 ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
                                          370),  # WALL_BOT_HEIGHT
         # Wall Dims
-                                    Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
+                                    Vec2(60, c.SCREEN_DIMENSIONS.y - 370)),
                                     c.WALL_COLOR),
                 ec.Position(Vec2(400, 370)),
                 ec.WallMovement(),
@@ -52,30 +53,30 @@ class DebugMode(bds.modes.GameMode):
         ]
 
 
-        self.e_list = [
+        self.e_list = list(util.flatten([
         # Water
             ec.base.Entity(self, components=[
                 ec.Rect(pygame.Rect(Vec2(40, 240), c.WATER_DIMS), c.WATER_COLOR),
                 ec.Position(Vec2(40, 240)),]),
         # # Walls
-        #     self.wall_list[:],
-        # Wall bottom
-            ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
-                                         370),  # WALL_BOT_HEIGHT
-        # Wall Dims
-                                    Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
-                                    c.WALL_COLOR),
-                ec.Position(Vec2(400, 370)),
-                ec.WallMovement(),
-                ec.Collider(),
-            ]),
+            self.wall_list,
+        # # Wall bottom
+        #     ec.base.Entity(self, components=[
+        #         ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
+        #                                  370),  # WALL_BOT_HEIGHT
+        # # Wall Dims
+        #                             Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
+        #                             c.WALL_COLOR),
+        #         ec.Position(Vec2(400, 370)),
+        #         ec.WallMovement(),
+        #         ec.Collider(),
+        #     ]),
 
         # Floor
             self.floor,
         # Bunny
             self.player,
-            ]
+            ]))
 
         self.fps_font = bds.resource.font.med_gui
 

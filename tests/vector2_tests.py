@@ -2,7 +2,7 @@ import math
 
 import nose.tools as n
 
-from game.vector import Vec2
+from bds.vector import Vec2
 
 
 def test_construction_x_y_and_access():

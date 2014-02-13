@@ -1,5 +1,5 @@
 import nose.tools as n
-import game
+import bds
 
 def setup():
     print "SETUP!"

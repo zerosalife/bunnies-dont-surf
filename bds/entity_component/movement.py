@@ -43,8 +43,8 @@ class PlayerMovement(Movement):
             self.velocity = c.TERMINAL_VELOCITY
         position += self.velocity * time_elapsed
 
-        if position.y < -20:
-            position.y = -20
+        if position.y < c.CEILING_Y:
+            position.y = c.CEILING_Y
 
         entity.handle("set_position", position)
 
@@ -55,6 +55,7 @@ class WallMovement(Movement):
         Movement.__init__(self)
 
         self.velocity = c.WALL_VELOCITY
+        self.scored = False
 
 
     def update(self, component, entity, event, time_elapsed):
@@ -62,7 +63,16 @@ class WallMovement(Movement):
 
         position += self.velocity * time_elapsed
 
-        # if position.x < BOUNDARY:
-        #     REMOVE IT
-
         entity.handle("set_position", position)
+
+        rect = entity.handle("get_rect")
+
+        p_pos = entity.mode.player.handle("get_position")
+
+        if position.x + rect.width / 2 < p_pos.x and self.scored == False:
+            entity.mode.score += 0.5
+            self.scored = True
+
+        if position.x < c.WALL_DESPAWN_X:
+            entity.mode.wall_list.pop(0)
+            entity.mode.e_list = entity.mode.make_e_list()

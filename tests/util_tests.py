@@ -8,3 +8,13 @@ def test_flatten_list():
     n.eq_(l, list(util.flatten(l)))
     l = [1, 2, 3, [4, 5]]
     n.eq_([1, 2, 3, 4, 5], list(util.flatten(l)))
+    l = [1, 2, 3, [[4, 5], 6]]
+    n.eq_([1, 2, 3, 4, 5, 6], list(util.flatten(l)))
+
+    l = [1, 2, 3]
+    l.extend([4, 5])
+    n.eq_([1, 2, 3, 4, 5], list(util.flatten(l)))
+
+    l = [1, 2, 3]
+    l.append([4, 5])
+    n.eq_([1, 2, 3, 4, 5], list(util.flatten(l)))

@@ -13,7 +13,6 @@ class Collider(Component):
         rect = entity.handle("get_rect")
 
         p_rect = entity.mode.player.handle("get_rect")
-        print rect, p_rect
 
         if rect.colliderect(p_rect):
             entity.mode.collisionp = True

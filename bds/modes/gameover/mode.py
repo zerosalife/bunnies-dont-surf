@@ -46,5 +46,5 @@ class GameOverMode(bds.modes.GameMode):
             e.render()
 
         scr.blit(self.game_over_logo, c.GAME_OVER_POS)
-        scr.blit(self.score_logo, c.SCORE_POS)
-        scr.blit(self.score, c.SCORE_POS + Vec2(0, 40))
+        scr.blit(self.score_logo, c.GAME_OVER_SCORE_POS)
+        scr.blit(self.score, c.GAME_OVER_SCORE_POS + Vec2(0, 40))

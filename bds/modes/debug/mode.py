@@ -24,9 +24,11 @@ class DebugMode(bds.modes.GameMode):
         self.new_presses = set()
 
         self.score = 0
-        self.score_pos_init = Vec2(c.SCORE_POS)
+        self.score_pos_init = Vec2(c.GAME_OVER_SCORE_POS)
 
         self.collisionp = False
+
+        self.wall_spawn_timer = c.WALL_SPAWN_TIMER_MAX
 
         self.player = ec.base.Entity(self, components=[
             ec.Rect(pygame.Rect(Vec2(80, 100), c.BUNNY_DIMS), c.BUNNY_COLOR),
@@ -38,47 +40,62 @@ class DebugMode(bds.modes.GameMode):
             ec.Position(Vec2(160, 440)),
             ec.Collider(),])
 
-        self.wall_list = [
-        # Wall bottom
-            ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
-                                         370),  # WALL_BOT_HEIGHT
-        # Wall Dims
-                                    Vec2(60, c.SCREEN_DIMENSIONS.y - 370)),
-                                    c.WALL_COLOR),
-                ec.Position(Vec2(400, 370)),
-                ec.WallMovement(),
-                ec.Collider(),
-            ]),
-        ]
+        self.wall_list = self.make_wall()
+
+        self.e_list = self.make_e_list()
 
 
-        self.e_list = list(util.flatten([
+        self.fps_font = bds.resource.font.med_gui
+
+    def make_e_list(self):
+        """Composites the entities in the correct order."""
+        return list(util.flatten([
         # Water
             ec.base.Entity(self, components=[
-                ec.Rect(pygame.Rect(Vec2(40, 240), c.WATER_DIMS), c.WATER_COLOR),
-                ec.Position(Vec2(40, 240)),]),
-        # # Walls
+                ec.Rect(pygame.Rect(c.WATER_POS, c.WATER_DIMS), c.WATER_COLOR),
+                ec.Position(c.WATER_POS),]),
+        # Walls
             self.wall_list,
-        # # Wall bottom
-        #     ec.base.Entity(self, components=[
-        #         ec.Rect(pygame.Rect(Vec2(400,   # WALL_SPAWN_X
-        #                                  370),  # WALL_BOT_HEIGHT
-        # # Wall Dims
-        #                             Vec2(80, c.SCREEN_DIMENSIONS.y - 370)),
-        #                             c.WALL_COLOR),
-        #         ec.Position(Vec2(400, 370)),
-        #         ec.WallMovement(),
-        #         ec.Collider(),
-        #     ]),
-
         # Floor
             self.floor,
         # Bunny
             self.player,
             ]))
 
-        self.fps_font = bds.resource.font.med_gui
+    def make_wall(self):
+        bottom_wall_top = random.randint(c.WALL_HEIGHT_LIMITS[0],
+                                         c.WALL_HEIGHT_LIMITS[1])
+        wall_gap = random.randint(c.WALL_GAP_LIMITS[0],
+                                  c.WALL_GAP_LIMITS[1])
+        print wall_gap
+        wall = [
+        # Wall bottom
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(c.WALL_SPAWN_X,
+                                         bottom_wall_top),
+        # Wall Dims
+                                    Vec2(c.WALL_WIDTH,
+                                         c.SCREEN_DIMENSIONS.y + wall_gap \
+                                            - bottom_wall_top)),
+                        c.WALL_COLOR),
+                ec.Position(Vec2(c.WALL_SPAWN_X, bottom_wall_top + wall_gap / 2)),
+                ec.WallMovement(),
+                ec.Collider(),
+                ]),
+        # Wall top
+            ec.base.Entity(self, components=[
+                ec.Rect(pygame.Rect(Vec2(c.WALL_SPAWN_X,
+                                         c.CEILING_Y),
+                                    Vec2(c.WALL_WIDTH,
+                                         bottom_wall_top - wall_gap)),
+                        c.WALL_COLOR),
+                ec.Position(Vec2(c.WALL_SPAWN_X, c.CEILING_Y)),
+                ec.WallMovement(),
+                ec.Collider(),
+            ]),]
+        print wall[0].handle("get_rect")
+        print wall[1].handle("get_rect")
+        return list(util.flatten(wall))
 
 
     def finish(self):
@@ -91,7 +108,7 @@ class DebugMode(bds.modes.GameMode):
                                Vec2(p_pos.x,
                                     floor_rect.top - c.BUNNY_DIMS.y / 2))
         self.game.mode = bds.modes.gameover.mode.GameOverMode(self.game,
-                                                              self.score,
+                                                              int(self.score),
                                                               self.e_list)
 
     def update(self, time_elapsed):
@@ -109,6 +126,13 @@ class DebugMode(bds.modes.GameMode):
             print "Collided"
             self.finish()
 
+        if self.wall_spawn_timer > 0:
+            self.wall_spawn_timer -= 1
+        else:
+            # Spawn a wall
+            self.wall_list.extend(self.make_wall())
+            self.e_list = self.make_e_list()
+            self.wall_spawn_timer = c.WALL_SPAWN_TIMER_MAX
 
         self.last_keys = self.pressed_keys
 
@@ -124,4 +148,7 @@ class DebugMode(bds.modes.GameMode):
 
         fps = self.fps_font.render("{0:.1f}".format(self.game.clock.get_fps()),
                                    True, c.UI_TEXT_COLOR)
+        score = self.fps_font.render("{0:d}".format(int(self.score)),
+                                     True, c.UI_TEXT_COLOR, c.BACKGROUND_COLOR)
         scr.blit(fps, c.FPS_POS.as_tuple())
+        scr.blit(score, c.SCORE_POS.as_tuple())

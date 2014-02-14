@@ -1,0 +1,42 @@
+* Bunnies Don't Surf
+You are an unfortunate rabbit whose warren is being flooded by a
+passing thunderstorm.  You have to navigate the tunnels of the warren,
+propelled by the wave of water flooding your home.  There's only one
+problem: *Bunnies Don't Surf*.  So you're stuck hopping up and down in
+a futile attempt to survive.
+
+*Bunnies Don't Surf* requires [[http://www.python.org/][Python]] and [[http://pygame.org/news.html][pygame]] ([[http://pygame.org/download.shtml][version 1.9.1]]) to
+play.
+
+This is a WIP prototype.
+
+Tap =SPACE= to hop. That's all there is to say about the controls.
+* License
+The source code is made available under the terms of the =MIT License=
+printed below and in the =LICENSE= file.  The license covers
+resources, unless explicitly stated.  The =PressStart2p.ttf= font by
+Codeman38 was obtained under [[http://scripts.sil.org/cms/scripts/page.php?site_id%3Dnrsi&id%3DOFL][SIL Open Font License, 1.1]].
+
+#+BEGIN_ASCII
+The MIT License (MIT)
+
+Copyright (c) 2014 zerosalife
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+#+END_ASCII

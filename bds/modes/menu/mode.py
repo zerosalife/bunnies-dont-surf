@@ -1,4 +1,5 @@
 import pygame
+import pygame.locals as pgl
 
 import bds
 
@@ -35,7 +36,11 @@ class MenuMode(bds.modes.GameMode):
         self.new_presses = set(k for k, v in pressed_keys.items() if v !=
                                self.last_keys[k] and v)
 
-        if self.game.input.state.space:
+        if input.state.space:
+            for key, name in c.KEY_MAPPING.iteritems():
+                if name == "space":
+                    space_key = key
+            input.pressed_keys[space_key] = False
             self.play()
 
         self.last_keys = pressed_keys

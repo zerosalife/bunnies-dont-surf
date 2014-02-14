@@ -17,7 +17,7 @@ printed below and in the =LICENSE= file.  The license covers
 resources, unless explicitly stated.  The =PressStart2p.ttf= font by
 Codeman38 was obtained under [[http://scripts.sil.org/cms/scripts/page.php?site_id%3Dnrsi&id%3DOFL][SIL Open Font License, 1.1]].
 
-#+BEGIN_ASCII
+#+BEGIN_EXAMPLE
 The MIT License (MIT)
 
 Copyright (c) 2014 zerosalife
@@ -39,4 +39,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-#+END_ASCII
+#+END_EXAMPLE

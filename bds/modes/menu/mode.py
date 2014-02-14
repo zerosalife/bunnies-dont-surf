@@ -12,15 +12,20 @@ class MenuMode(bds.modes.GameMode):
     def __init__(self, game):
         bds.modes.GameMode.__init__(self, game)
 
-        self.main_font = bds.resource.font.med_gui
+        self.main_font = bds.resource.font.small_gui
 
-        def play():
-            self.game.mode = bds.modes.debug.mode.DebugMode(self.game)
+        # self.logo = ec.base.Entity(self, components=[
+        # ])
+        self.logo_top = self.main_font.render("Bunnies Don't Surf",
+                                              True, c.UI_TEXT_COLOR)
+        self.instructions = self.main_font.render("Tap SPACE to hop.",
+                                                  True, c.UI_TEXT_COLOR)
+        self.logo_bottom = self.main_font.render("Press SPACE to start.",
+                                                 True, c.UI_TEXT_COLOR)
 
 
-        self.logo = ec.base.Entity(self, components=[
-        ])
-
+    def play(self):
+        self.game.mode = bds.modes.debug.mode.DebugMode(self.game)
 
     def update(self, time_elapsed):
         input = self.game.input
@@ -30,7 +35,7 @@ class MenuMode(bds.modes.GameMode):
         self.new_presses = set(k for k, v in pressed_keys.items() if v !=
                                self.last_keys[k] and v)
 
-        if entity.mode.game.input.state.space:
+        if self.game.input.state.space:
             self.play()
 
         self.last_keys = pressed_keys
@@ -41,4 +46,7 @@ class MenuMode(bds.modes.GameMode):
 
         scr.fill(c.BACKGROUND_COLOR)
 
-        self.logo.render()
+        # self.logo.render()
+        scr.blit(self.logo_top, (c.SCREEN_DIMENSIONS.x / 2 - 120, 100))
+        scr.blit(self.instructions, (c.SCREEN_DIMENSIONS.x / 2 - 110, 200))
+        scr.blit(self.logo_bottom, (c.SCREEN_DIMENSIONS.x / 2 - 125, 350))

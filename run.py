@@ -3,7 +3,7 @@ if __name__ == '__main__':
 
     game = bds.game.Game()
 
-    import bds.modes.debug.mode
-    game.mode = bds.modes.debug.mode.DebugMode(game)
+    import bds.modes.menu.mode
+    game.mode = bds.modes.menu.mode.MenuMode(game)
 
     game.loop()

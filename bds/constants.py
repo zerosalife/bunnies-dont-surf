@@ -52,5 +52,6 @@ RES_IMAGES = {
 }
 
 RES_FONTS = {
+    "small_gui": ("data/fonts/PressStart2P-Regular.ttf", 13),
     "med_gui": ("data/fonts/PressStart2P-Regular.ttf", 16),
 }

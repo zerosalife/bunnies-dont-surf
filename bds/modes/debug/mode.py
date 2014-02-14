@@ -67,7 +67,7 @@ class DebugMode(bds.modes.GameMode):
                                          c.WALL_HEIGHT_LIMITS[1])
         wall_gap = random.randint(c.WALL_GAP_LIMITS[0],
                                   c.WALL_GAP_LIMITS[1])
-        print wall_gap
+        # print wall_gap
         wall = [
         # Wall bottom
             ec.base.Entity(self, components=[
@@ -93,8 +93,8 @@ class DebugMode(bds.modes.GameMode):
                 ec.WallMovement(),
                 ec.Collider(),
             ]),]
-        print wall[0].handle("get_rect")
-        print wall[1].handle("get_rect")
+        # print wall[0].handle("get_rect")
+        # print wall[1].handle("get_rect")
         return list(util.flatten(wall))
 
 
@@ -123,7 +123,7 @@ class DebugMode(bds.modes.GameMode):
             e.update(time_elapsed)
 
         if self.collisionp:
-            print "Collided"
+            # print "Collided"
             self.finish()
 
         if self.wall_spawn_timer > 0:

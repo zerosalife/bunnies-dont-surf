@@ -6,7 +6,7 @@ problem: *Bunnies Don't Surf*.  So you're stuck hopping up and down in
 a futile attempt to survive.
 
 *Bunnies Don't Surf* requires [[http://www.python.org/][Python]] and [[http://pygame.org/news.html][pygame]] ([[http://pygame.org/download.shtml][version 1.9.1]]) to
-play.
+play.  Start it with =python run.py= from the command line.
 
 This is a WIP prototype.
 

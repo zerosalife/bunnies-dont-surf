@@ -9,7 +9,7 @@ DT = 1/30.                                      # Physics fps
 
 GRAVITY = vector.Vec2(0, 9) * 1000
 TERMINAL_VELOCITY = vector.Vec2(0, 90)
-BUNNY_JUMP = vector.Vec2(0, -20) * 1000
+BUNNY_JUMP = vector.Vec2(0, -16) * 1000
 WALL_VELOCITY = vector.Vec2(-90, 0)
 
 BACKGROUND_COLOR = pygame.Color("0x000000")     # Black
